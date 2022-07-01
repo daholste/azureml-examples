@@ -22,6 +22,8 @@ def launch_run(
 
         # env_gpu = Environment.get(workspace, 'my-openmpi4-pytorch', 6)
         env_gpu = Environment.from_dockerfile('distributed_training_pytorch_env', 'Dockerfile')
+        env_gpu.environment_variables = {'AZUREML_COMPUTE_USE_COMMON_RUNTIME': 'False'}
+
         distributed_config = PyTorchConfiguration(process_count=num_gpus * node_count, node_count=node_count)
         
         # Get MS COCO training set
